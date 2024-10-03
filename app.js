@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const Slot = require("./models/slotModel")
+const Venue = require("./models/venueModel")
 
 dotenv.config();
 const app = express();
@@ -60,6 +61,34 @@ app.get("/slot", async (req, res) => {
         return res.status(500).json({ message: "Unexpected error, please try again later!" });
     }
 });
+
+
+app.get('/venues', async (req, res) => {
+    try {
+        // const { page = 1, limit = 10 } = req.query;
+
+        // const pageNumber = parseInt(page, 10);
+        // const limitNumber = parseInt(limit, 10);
+
+        // const skip = (pageNumber - 1) * limitNumber;
+
+        const venues = await Venue.find()
+        // .skip(skip)
+        //  .limit(limitNumber);
+        const total = await Venue.countDocuments();
+        const response = {
+            data: venues,
+            //  total
+        };
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Unexpected error, please try again later!",
+        });
+    }
+});
+
 
 
 
