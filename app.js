@@ -90,7 +90,25 @@ app.get('/venues', async (req, res) => {
 });
 
 
+app.post('/unblockslot', async (req, res) => {
+    try {
+    const {  venue_external_id,court_external_id, start_time , end_time
+    } = req.body;
+    console.log("venue_external_id,court_external_id, start_time , end_time",venue_external_id,court_external_id, start_time , end_time)
+        return res.status(200).json(response);
+    } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+        message: "Unexpected error, please try again later!",
+    });
+ }
+}
 
+)
+
+app.get('/test', async (req, res) => {
+    return res.status(200).json("dummmy api deployed");
+})
 
 mongoose
     .connect(process.env.MONGO_DB_URL)
