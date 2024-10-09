@@ -44,7 +44,10 @@ app.get("/slot", async (req, res) => {
 
         const slots = await Slot.find(query);
         if (!slots || slots.length === 0) {
-            return res.status(404).json({ message: 'No slots found for the given criteria' });
+            return res.status(404).json({
+                message: 'No slots found for the given criteria',
+                data: []
+            });
         }
         const formattedResponse = {
             message: "Slots fetched successfully!",
@@ -92,16 +95,16 @@ app.get('/venues', async (req, res) => {
 
 app.post('/unblockslot', async (req, res) => {
     try {
-    const {  venue_external_id,court_external_id, start_time , end_time
-    } = req.body;
-    console.log("venue_external_id,court_external_id, start_time , end_time",venue_external_id,court_external_id, start_time , end_time)
+        const { venue_external_id, court_external_id, start_time, end_time
+        } = req.body;
+        console.log("venue_external_id,court_external_id, start_time , end_time", venue_external_id, court_external_id, start_time, end_time)
         return res.status(200).json(response);
     } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-        message: "Unexpected error, please try again later!",
-    });
- }
+        console.error(error);
+        return res.status(500).json({
+            message: "Unexpected error, please try again later!",
+        });
+    }
 }
 
 )
@@ -120,6 +123,6 @@ mongoose
     });
 
 const port = process.env.PORT || 3000;
-app.listen(port,'0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`App listening on port ${port}`);
 });
