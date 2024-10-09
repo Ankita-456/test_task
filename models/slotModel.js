@@ -3,6 +3,9 @@
 const mongoose = require('mongoose');
 
 const SlotSchema = new mongoose.Schema({
+    _id:{
+        type: Number,
+    },
     venue_external_id: {
         type: String,
         required: true
@@ -20,7 +23,7 @@ const SlotSchema = new mongoose.Schema({
         required: true
     },
     duration: {
-        type: Number,  
+        type: Number,
         required: true
     },
     buffer_between_slots: {
@@ -43,7 +46,11 @@ const SlotSchema = new mongoose.Schema({
     platform_fees: {
         type: Number,
         required: true
+    },
+     available: {
+        type: Boolean
     }
+
 });
 
 const Slot = mongoose.model('Slot', SlotSchema);
