@@ -41,7 +41,6 @@ app.get("/slot", async (req, res) => {
                 }
             })
         };
-
         const slots = await Slot.find(query);
         if (!slots || slots.length === 0) {
             return res.status(404).json({
